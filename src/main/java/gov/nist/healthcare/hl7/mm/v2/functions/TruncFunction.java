@@ -75,8 +75,7 @@ public class TruncFunction extends Function {
 						// trunc(4, left) Hello --> Hell
 						value = value.substring(0, max);
 					}
-					ConstantValue myValue = new ConstantValue(value);
-					resultText =this.messageHandler.set(selector, resultText,myValue);
+					resultText =this.messageHandler.set(selector, resultText,value);
 					context.setMessage(resultText);
 				}
 				} catch (IOException e1) {

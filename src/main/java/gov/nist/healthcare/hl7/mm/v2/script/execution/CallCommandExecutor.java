@@ -13,6 +13,7 @@ import gov.nist.healthcare.hl7.mm.v2.nathancode.IssueType;
 import gov.nist.healthcare.hl7.mm.v2.domain.CallCommand;
 import gov.nist.healthcare.hl7.mm.v2.domain.Command;
 import gov.nist.healthcare.hl7.mm.v2.domain.CommandType;
+import gov.nist.healthcare.hl7.mm.v2.functions.AnonymizeAndUpdateRecordProcedure;
 import gov.nist.healthcare.hl7.mm.v2.functions.CleanFunction;
 import gov.nist.healthcare.hl7.mm.v2.functions.ClearFunction;
 import gov.nist.healthcare.hl7.mm.v2.functions.FixAmpersandFunction;
@@ -23,6 +24,8 @@ import gov.nist.healthcare.hl7.mm.v2.functions.InsertBeforeFunction;
 import gov.nist.healthcare.hl7.mm.v2.functions.InsertFirstFunction;
 import gov.nist.healthcare.hl7.mm.v2.functions.InsertLastFunction;
 import gov.nist.healthcare.hl7.mm.v2.functions.MapFunction;
+import gov.nist.healthcare.hl7.mm.v2.functions.SetupRandomData;
+import gov.nist.healthcare.hl7.mm.v2.functions.ShiftDates;
 import gov.nist.healthcare.hl7.mm.v2.functions.TruncFunction;
 import gov.nist.healthcare.hl7.mm.v2.message.util.HL7MessageHandler;
 
@@ -46,6 +49,12 @@ public class CallCommandExecutor implements CommandExecutor {
 		this.functions.add(new InsertBeforeFunction(messageHandler, "insertBefore"));
 		this.functions.add(new InsertFirstFunction(messageHandler, "insertFirst"));
 		this.functions.add(new InsertLastFunction(messageHandler, "insertLast"));
+		this.functions.add(new AnonymizeAndUpdateRecordProcedure(messageHandler, "anonymizeAndUpdateRecordProcedure"));
+		this.functions.add(new SetupRandomData(messageHandler, "setupRandomData"));
+		this.functions.add(new ShiftDates(messageHandler, "shiftDates"));
+
+
+
 
 	}
 
@@ -56,6 +65,12 @@ public class CallCommandExecutor implements CommandExecutor {
 	public <T extends Command> void execute(ExecutionContext context, T command) throws CommandExecutionException {
 		CallCommand callCommand = (CallCommand) command;
 		Function f = this.functions.stream().filter(x -> x.getName().equals(callCommand.getName())).findFirst().orElse(null);
+//		System.out.println("AAAAND LOOOOOOOOK HEEEEEERE : : : " +f.getName());
+//		if(!functions.contains(f)){
+//			System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+//				Issue issue = new Issue(IssueType.Error,"Function " +f.getName()+"Could not be found " + "\n" );
+//				context.getScript().getSyntax().add(issue);
+//		}
 		if(f != null) {
 			
 			try {
@@ -64,8 +79,14 @@ public class CallCommandExecutor implements CommandExecutor {
 				Issue issue = new Issue(IssueType.Warning,"Couldn't excecute " + f.getName()  +" function : " + callCommand.getSelector().getPath().toString()+ " could not be found in the message" + "\n" );
 		 		throw new CommandExecutionException(issue);	
 			}
+		}else {
+			Issue issue = new Issue(IssueType.Error,"Function not found " + "\n" );
+			context.getIssues().add(issue);
 		}
 		
 	}
+	
+	
+	
 
 }

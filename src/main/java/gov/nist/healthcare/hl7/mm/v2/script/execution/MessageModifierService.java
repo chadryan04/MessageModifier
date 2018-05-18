@@ -56,20 +56,20 @@ public class MessageModifierService {
 		context.setMessage(msg);
 		if(script != null){
 			context.setScript(script);
-			Issue issue = new Issue(IssueType.Information,"The executed script is : " +"\n" + scr + "\n"+"\n");
-			context.issues.add(issue);
+//			Issue issue = new Issue(IssueType.Information,"The executed script is : " +"\n" + scr + "\n"+"\n");
+//			context.issues.add(issue);
 			for(Command c : script.getCommands()){
 				try {
 					this.execute(context, c);
-					Issue issueInformation = new Issue(IssueType.Information,"The resulted message of the execution of the command " + c.toString() + " is : " +"\n"+ context.getMessage()+"\n"+"\n");
-					context.issues.add(issueInformation);
+//					Issue issueInformation = new Issue(IssueType.Information,"The resulted message of the execution of the command " + c.toString() + " is : " +"\n"+ context.getMessage()+"\n"+"\n");
+//					context.issues.add(issueInformation);
 				} 
 				catch (CommandExecutionException e) {
 					context.issues.add(e.getIssue());
 				}
 			}
-			Issue issueExecutedCommands = new Issue(IssueType.Information,"The number of executed commands is : " + context.getExecutedCommands() +"\n"+"\n");
-			context.issues.add(issueExecutedCommands);
+//			Issue issueExecutedCommands = new Issue(IssueType.Information,"The number of executed commands is : " + context.getExecutedCommands() +"\n"+"\n");
+//			context.issues.add(issueExecutedCommands);
 		}
 
 		return new ModificationResult(context.getIssues(), script != null, context.getExecutedCommands(), context.getMessage());		

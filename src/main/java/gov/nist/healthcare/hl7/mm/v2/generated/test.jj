@@ -79,8 +79,8 @@ TOKEN :
 |
   < NUM: ( ["0"-"9"] )+  >
 |
-  < PRESET_VALUE: "["["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* "]">
-|
+//  < PRESET_VALUE: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* >
+//|
   < UNQUOTED_STRING : ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* >
 |
   < CONTEXT_SELECTOR : "::" >
@@ -205,7 +205,7 @@ Value STATEMENT() : {
 {
 	(
 	   value  = < STRING > { return new ConstantValue(Parser.extract(value.image)); }
-	 | preset = <PRESET_VALUE> { return new PresetValue(preset.image); }
+	 |  "[" preset = < UNQUOTED_STRING > "]" { return new PresetValue(preset.image); }
 	 | "$" ref = REFERENCE() { return new ReferenceValue(ref); }	)
 }
 

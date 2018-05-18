@@ -36,5 +36,8 @@ public class MMScript {
 		this.syntax = syntax;
 	}
 	
+	public void addIssueToSyntax(Issue issue) {
+		this.syntax.add(issue);
+	}
 	
 }

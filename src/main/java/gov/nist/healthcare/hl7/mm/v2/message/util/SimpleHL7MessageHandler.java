@@ -41,38 +41,15 @@ public class SimpleHL7MessageHandler implements HL7MessageHandler {
 	}
 
 	@Override
-	public String set(Reference ref, String message, Value value) {
+	public String set(Reference ref, String message, String value) {
 		ReferenceParsed t = ref.toRefParsed();
-		String newValue = "";
 		ModificationDetails modifyRequest = new ModificationDetails();
 
-		if(value instanceof ConstantValue) {
-			newValue = ((ConstantValue) value).getConstant();	
-
-		}
-		else if(value instanceof ReferenceValue) {	
-				ReferenceParsed ValueReferenced = ((ReferenceValue) value).getReference().toRefParsed();
-				try {
-					newValue = SetCommand.getValueFromHL7(message, ValueReferenced, modifyRequest);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CommandExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    		
-			}
-
 		
-		else if (value instanceof PresetValue) {			
-		}
-		else {
-		}
 		
 			String result = "Value could not be set";
 			try {
-				result = SetCommand.setValueInHL7(newValue,message, t, modifyRequest);
+				result = SetCommand.setValueInHL7(value,message, t, modifyRequest);
 				return result;
 
 			} catch (IOException e) {

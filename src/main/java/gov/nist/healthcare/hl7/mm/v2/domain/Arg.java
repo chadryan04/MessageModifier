@@ -8,6 +8,7 @@ package gov.nist.healthcare.hl7.mm.v2.domain;
 public class Arg {
 	
 	private String name;
+	private String test;
 	private ConstantValue value;
 	
 	public String toString() {

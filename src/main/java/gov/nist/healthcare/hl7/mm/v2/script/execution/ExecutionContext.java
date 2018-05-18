@@ -2,6 +2,7 @@ package gov.nist.healthcare.hl7.mm.v2.script.execution;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import gov.nist.healthcare.hl7.mm.v2.nathancode.CommandExecutionException;
 import gov.nist.healthcare.hl7.mm.v2.nathancode.Issue;
@@ -17,6 +18,7 @@ public class ExecutionContext {
 	String messageOriginal;
 	String messageFinal;
 	String message;
+	Map<String, String> randomValues;
 	
 	/**
 	 * The attribute environment will be used to specify the context if we ever work on different context as immunization
@@ -27,6 +29,12 @@ public class ExecutionContext {
 	
 	
 	
+	public Map<String, String> getRandomValues() {
+		return randomValues;
+	}
+	public void setRandomValues(Map<String, String> randomValues) {
+		this.randomValues = randomValues;
+	}
 	public String getMessage() {
 		return message;
 	}

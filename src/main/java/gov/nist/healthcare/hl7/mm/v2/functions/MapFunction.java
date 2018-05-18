@@ -53,8 +53,7 @@ public class MapFunction extends Function {
 		    int mapPos = value.toUpperCase().indexOf(key.toUpperCase());
 		    if (mapPos == -1 && !(key.toUpperCase().equals("DEFAULT"))) {
 		    	String newValue = parameterMap.get("DEFAULT");
-			    ConstantValue myValue = new ConstantValue(newValue);	
-			    resultText = this.messageHandler.set(selector, resultText,myValue);
+			    resultText = this.messageHandler.set(selector, resultText,newValue);
 			    context.setMessage(resultText);
 		    }
 		    if (mapPos != -1) {
@@ -63,8 +62,7 @@ public class MapFunction extends Function {
 		    	String value1 = value.substring(0, startIndex);
 		    	String value2 = value.substring(endIndex, value.length());
 		    	String newValue = value1 + parameterMap.get(key) + value2;
-		    	ConstantValue myValue = new ConstantValue(newValue);	
-		    	resultText = this.messageHandler.set(selector, resultText, myValue);
+		    	resultText = this.messageHandler.set(selector, resultText, newValue);
 		    	context.setMessage(resultText);
 		    }
 			} catch (IOException e) {

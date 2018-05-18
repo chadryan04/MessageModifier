@@ -10,6 +10,6 @@ import gov.nist.healthcare.hl7.mm.v2.nathancode.CommandExecutionException;
 public interface HL7MessageHandler {
 	
 	public String get(Reference ref, String message) throws IOException, CommandExecutionException;
-	public String set(Reference ref, String message, Value value) throws CommandExecutionException, IOException;
+	public String set(Reference ref, String message, String value) throws CommandExecutionException, IOException;
 
 }

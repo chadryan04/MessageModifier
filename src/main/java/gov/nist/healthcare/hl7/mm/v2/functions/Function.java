@@ -24,6 +24,8 @@ public abstract class Function {
     
 	public abstract void execute(ExecutionContext context, Reference selector,Map<String, String> parameterMap) throws CommandExecutionException;
 	
+//	public abstract String showMeDocumentation();
+	
     public String getArgValue(List<Arg> arguments, String argName) {
      Arg arg = 	arguments.stream().filter(x -> x.getName().equals(argName)).findFirst().orElse(null);
      if(arg != null) {
