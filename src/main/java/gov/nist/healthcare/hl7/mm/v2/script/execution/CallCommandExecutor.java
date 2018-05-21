@@ -53,9 +53,6 @@ public class CallCommandExecutor implements CommandExecutor {
 		this.functions.add(new SetupRandomData(messageHandler, "setupRandomData"));
 		this.functions.add(new ShiftDates(messageHandler, "shiftDates"));
 
-
-
-
 	}
 
 	public boolean handles(CommandType type) {
