@@ -23,7 +23,6 @@ public class SyntaxChecker {
 	public String checkSyntax(String script) throws ParseException, TokenMgrError {
 		MMScript mmScript = Parser.parseLineByLine(script);
 		String result="";
-		System.out.println("LOOOOK HEEEEERE : " + mmScript.getCommands().toString());
 		for(Issue i : mmScript.getSyntax()) {
 		    result = result + i.toString() +"\n";
 		}

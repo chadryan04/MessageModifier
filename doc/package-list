@@ -1,1 +1,7 @@
+gov.nist.healthcare.hl7.mm.v2.domain
+gov.nist.healthcare.hl7.mm.v2.functions
+gov.nist.healthcare.hl7.mm.v2.generated
+gov.nist.healthcare.hl7.mm.v2.message.util
+gov.nist.healthcare.hl7.mm.v2.nathancode
+gov.nist.healthcare.hl7.mm.v2.procedure
 gov.nist.healthcare.hl7.mm.v2.script.execution
