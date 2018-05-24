@@ -44,6 +44,8 @@ public class MapFunction extends Function {
 		    Map.Entry<String, String> entry = (Map.Entry)it.next();
 		    String key = entry.getKey();
 		    
+		    System.out.println("key :" + key);
+		    
 			String resultText = context.getMessage();
 			String value;
 			try {
@@ -57,9 +59,13 @@ public class MapFunction extends Function {
 			    context.setMessage(resultText);
 		    }
 		    if (mapPos != -1) {
-		    	int startIndex = value.indexOf(key);
+		    	int startIndex = value.toUpperCase().indexOf(key);
 		    	int endIndex = startIndex + key.length();
+		       	System.out.println("value :" + value);
+		    	System.out.println("StartIndex :" + startIndex );
 		    	String value1 = value.substring(0, startIndex);
+		 
+
 		    	String value2 = value.substring(endIndex, value.length());
 		    	String newValue = value1 + parameterMap.get(key) + value2;
 		    	resultText = this.messageHandler.set(selector, resultText, newValue);

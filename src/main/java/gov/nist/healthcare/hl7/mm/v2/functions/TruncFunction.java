@@ -38,10 +38,11 @@ public class TruncFunction extends Function {
 	 		context.getIssues().add(issueError);
 	 		context.getIssues().add(issueInformation);
 			
-		}else {
+		}else if(parameterMap.containsKey(PARAM_MAX) && parameterMap.containsKey(PARAM_CUT)) {
 			
-			Issue issueInformation = new Issue(IssueType.Warning,"No side was choosen, will automaticaly cut from the right " + "\n"+ "\n");
-	 		context.getIssues().add(issueInformation);
+			System.out.println("SADASDASDASDASDSAD");
+//			Issue issueInformation = new Issue(IssueType.Warning,"No side was choosen, will automaticaly cut from the right " + "\n"+ "\n");
+//	 		context.getIssues().add(issueInformation);
 		
 		String maxString = parameterMap.get(PARAM_MAX);
 
@@ -87,6 +88,9 @@ public class TruncFunction extends Function {
 		}
 		
 	
+		} else {
+			Issue issueInformation = new Issue(IssueType.Warning,"The truncFunction takes 2 arguments : " + "\n"+  "- Mandatory : The number of character to truncate to"+ "\n" + "- Optional : The side to truncate from" + "\n" + "Exemple 1 : for $PID-5.2 call trunc(max => 2)" + "\n"+ "Exemple 2 : for $RXA-7.2 call trunc(Max => 5, cut => left). Please refer to documentation." + "\n"+ "\n");
+	 		context.getIssues().add(issueInformation);
 		}
 }
 }
